@@ -1,0 +1,16 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/alamo-utec/openai_assistant_flask', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/alamo-utec/openai_assistant_flask']
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: ['apply', '-f', 'kubernetes/deployment.yaml']
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=southamerica-east1-a'  
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: ['apply', '-f', 'kubernetes/service.yaml']
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=southamerica-east1-a'
+
+images:
+  - 'gcr.io/alamo-utec/openai_assistant_flask'
