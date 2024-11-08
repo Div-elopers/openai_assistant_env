@@ -17,3 +17,5 @@ images:
 
 options:
   logging: CLOUD_LOGGING_ONLY
+  logsBucket: "gs://alamo-utec-build-logs"
+
